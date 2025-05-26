@@ -1,0 +1,70 @@
+import { StyleSheet, Platform } from "react-native";
+
+export const styles = StyleSheet.create({
+  container: {
+    flexGrow: 1,
+    padding: 20,
+    backgroundColor: "#f2f4f7",
+    justifyContent: "center",
+  },
+  card: {
+    backgroundColor: "#ffffff",
+    borderRadius: 12,
+    padding: 20,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    elevation: 5,
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: "700",
+    marginBottom: 20,
+    textAlign: "center",
+    color: "#1a1a1a",
+  },
+  label: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: "#333",
+    marginTop: 15,
+    marginBottom: 5,
+  },
+  input: {
+    backgroundColor: "#f9f9f9",
+    borderWidth: 1,
+    borderColor: "#ddd",
+    borderRadius: 8,
+    padding: 12,
+    fontSize: 16,
+  },
+  pickerWrapper: {
+    borderWidth: Platform.OS === "android" ? 0 : 1,
+    borderColor: "#ddd",
+    borderRadius: 8,
+    overflow: "hidden",
+    backgroundColor: "#f9f9f9",
+  },
+  picker: {
+    height: 50,
+    width: "100%",
+  },
+  button: {
+    backgroundColor: "#28a745",
+    paddingVertical: 14,
+    borderRadius: 10,
+    marginTop: 30,
+    alignItems: "center",
+    shadowColor: "#28a745",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 3,
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "600",
+  },
+});
