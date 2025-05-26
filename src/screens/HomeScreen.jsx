@@ -14,7 +14,7 @@ const HomeScreen = () => {
 
       <View style={styles.imageContainer}>
         <Image
-          source={require("../assets/watch.png")}
+          source={require("../../assets/watch.png")}
           style={styles.image}
           resizeMode="contain"
         />

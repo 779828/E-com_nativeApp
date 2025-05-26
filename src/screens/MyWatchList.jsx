@@ -20,7 +20,7 @@ const watchlistData = [
     oldPrice: 450,
     rating: 4.3,
     discount: "30% off",
-    image: require("../assets/beats.webp"),
+    image: require("../../assets/beats.webp"),
   },
   {
     id: "2",
@@ -30,7 +30,7 @@ const watchlistData = [
     oldPrice: 450,
     rating: 4.4,
     discount: "",
-    image: require("../assets/realme_airpods.jpg"),
+    image: require("../../assets/realme_airpods.jpg"),
   },
   {
     id: "3",
@@ -40,7 +40,7 @@ const watchlistData = [
     oldPrice: null,
     rating: 4.1,
     discount: "",
-    image: require("../assets/watch.png"),
+    image: require("../../assets/watch.png"),
   },
   {
     id: "4",
@@ -50,7 +50,7 @@ const watchlistData = [
     oldPrice: 550,
     rating: 4.5,
     discount: "20% off",
-    image: require("../assets/phone1.jpg"),
+    image: require("../../assets/phone1.jpg"),
   },
   {
     id: "5",
@@ -60,7 +60,7 @@ const watchlistData = [
     oldPrice: null,
     rating: 4.5,
     discount: "15% off",
-    image: require("../assets/macbook.jpeg"),
+    image: require("../../assets/macbook.jpeg"),
   },
 ];
 

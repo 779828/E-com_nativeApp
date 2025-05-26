@@ -16,13 +16,13 @@ const topDeals = [
     id: "1",
     text: "Get Excited gifts on\npurchase upto $458.26",
     bgColor: "#fd7e4d",
-    image: require("../assets/gift1.jpeg"),
+    image: require("../../assets/gift1.jpeg"),
   },
   {
     id: "2",
     text: "Get Excited gifts on\npurchase upto $458.26",
     bgColor: "#47c8d7",
-    image: require("../assets/gift2.png"),
+    image: require("../../assets/gift2.png"),
   },
 ];
 
@@ -67,7 +67,7 @@ const OfferScreen = () => {
           <Text style={styles.shopText}>Shop Now →</Text>
         </TouchableOpacity>
         <Image
-          source={require("../assets/realme_airpods.png")}
+          source={require("../../assets/realme_airpods.png")}
           style={styles.trendImg}
         />
       </View>
