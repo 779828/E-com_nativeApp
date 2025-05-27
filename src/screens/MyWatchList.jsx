@@ -30,7 +30,7 @@ const watchlistData = [
     oldPrice: 450,
     rating: 4.4,
     discount: "",
-    image: require("../../assets/realme_airpods.jpg"),
+    image: require("../../assets/realme_airpods.png"),
   },
   {
     id: "3",

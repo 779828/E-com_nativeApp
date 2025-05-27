@@ -26,26 +26,28 @@ const CreateProductScreen = () => {
     image: "",
     category_id: null,
   });
+
   const [categories, setCategories] = useState([]);
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const { data, error } = await supabase
-          .from("categories")
-          .select("id, name")
-          .in("name", ["Android Phones", "iPhones"]);
-        if (error) {
-          console.error("Error fetching categories:", error);
-          Alert.alert("Error", "Failed to load categories");
-          return;
-        }
-        setCategories(data);
-      } catch (error) {
-        console.error("Fetch categories error:", error);
-        Alert.alert("Error", "Something went wrong");
+  const fetchCategories = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("categories")
+        .select("id, name")
+        .in("name", ["Android Phones", "iPhones"]);
+      if (error) {
+        console.error("Error fetching categories:", error);
+        Alert.alert("Error", "Failed to load categories");
+        return;
       }
-    };
+      setCategories(data);
+    } catch (error) {
+      console.error("Fetch categories error:", error);
+      Alert.alert("Error", "Something went wrong");
+    }
+  };
+
+  useEffect(() => {
     fetchCategories();
   }, []);
 
@@ -69,8 +71,8 @@ const CreateProductScreen = () => {
       allowsEditing: true,
       aspect: [1, 1],
       quality: 1,
-      maxWidth: 300,
-      maxHeight: 300,
+      maxWidth: 500,
+      maxHeight: 500,
     });
 
     if (!result.canceled && result.assets && result.assets.length > 0) {
