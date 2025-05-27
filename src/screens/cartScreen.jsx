@@ -94,9 +94,7 @@ const CartScreen = () => {
         <View style={{ width: 24 }} />
       </View>
 
-      {status === "loading" ? (
-        <Text style={styles.emptyText}>Loading...</Text>
-      ) : error ? (
+      {error ? (
         <Text style={styles.emptyText}>Error: {error}</Text>
       ) : (
         <FlatList
@@ -110,32 +108,45 @@ const CartScreen = () => {
         />
       )}
 
-      <View style={styles.summary}>
-        <View style={styles.summaryRow}>
-          <Text style={styles.summaryLabel}>Subtotal</Text>
-          <Text style={styles.summaryValue}>${subtotal.toFixed(2)}</Text>
-        </View>
-        <View style={styles.summaryRow}>
-          <Text style={styles.summaryLabel}>Shipping</Text>
-          <Text style={styles.shippingValue}>Free</Text>
-        </View>
-        <View style={styles.summaryRow}>
-          <Text style={styles.summaryLabel}>Total</Text>
-          <Text style={styles.summaryValue}>${total.toFixed(2)}</Text>
-        </View>
-      </View>
+      {subtotal ? (
+        <View>
+          <View style={styles.summary}>
+            <View style={styles.summaryRow}>
+              <Text style={styles.summaryLabel}>Subtotal</Text>
+              <Text style={styles.summaryValue}>${subtotal.toFixed(2)}</Text>
+            </View>
+            <View style={styles.summaryRow}>
+              <Text style={styles.summaryLabel}>Shipping</Text>
+              <Text style={styles.shippingValue}>Free</Text>
+            </View>
+            <View style={styles.summaryRow}>
+              <Text style={styles.summaryLabel}>Total</Text>
+              <Text style={styles.summaryValue}>${total.toFixed(2)}</Text>
+            </View>
+          </View>
 
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={styles.addMoreBtn}
-          onPress={() => navigation.navigate("Accessories")}
-        >
-          <Text style={styles.addMoreText}>Add More</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.checkoutBtn}>
-          <Text style={styles.checkoutText}>Checkout</Text>
-        </TouchableOpacity>
-      </View>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={styles.addMoreBtn}
+              onPress={() => navigation.navigate("Accessories")}
+            >
+              <Text style={styles.addMoreText}>Add More</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.checkoutBtn}>
+              <Text style={styles.checkoutText}>Checkout</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      ) : (
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.addMoreBtn}
+            onPress={() => navigation.navigate("Accessories")}
+          >
+            <Text style={styles.addMoreText}>Add To Cart</Text>
+          </TouchableOpacity>
+        </View>
+      )}
     </View>
   );
 };

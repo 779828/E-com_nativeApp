@@ -70,9 +70,9 @@ const cartSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchUserCart.pending, (state) => {
-        state.status = "loading";
-      })
+      // .addCase(fetchUserCart.pending, (state) => {
+      //   state.status = "loading";
+      // })
       .addCase(fetchUserCart.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.items = action.payload;

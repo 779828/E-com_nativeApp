@@ -21,13 +21,14 @@ import { useDispatch } from "react-redux";
 import { addItemToCart } from "../store/cartItemsSlice";
 
 const AccessoriesScreen = () => {
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+
   const [searchQuery, setSearchQuery] = useState("");
   const [refreshing, setRefreshing] = useState(false);
   const [cards, setCards] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
-  const navigation = useNavigation();
-  const dispatch = useDispatch();
 
   const fetchData = async () => {
     try {
