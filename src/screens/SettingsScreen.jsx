@@ -15,10 +15,10 @@ const SettingsScreen = () => {
 
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut();
+    await AsyncStorage.removeItem("user");
     if (error) {
       Alert.alert("Logout Error", error.message);
     } else {
-      await AsyncStorage.removeItem("user");
       navigation.dispatch({
         ...StackActions.reset({
           index: 0,

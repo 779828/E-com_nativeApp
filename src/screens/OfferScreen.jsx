@@ -29,6 +29,7 @@ const topDeals = [
 ];
 
 const OfferScreen = () => {
+  const navigation = useNavigation();
   const [session, setSession] = useState();
 
   const getSession = async () => {
@@ -42,8 +43,6 @@ const OfferScreen = () => {
   }, []);
 
   console.log(session);
-
-  const navigation = useNavigation();
 
   return (
     <ScrollView style={styles.container}>
