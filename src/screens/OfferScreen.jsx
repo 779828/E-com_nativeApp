@@ -41,7 +41,7 @@ const OfferScreen = () => {
     getSession();
   }, []);
 
-  console.log(session?.user?.id);
+  console.log(session);
 
   const navigation = useNavigation();
 
