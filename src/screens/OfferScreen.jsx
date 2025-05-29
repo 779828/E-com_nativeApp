@@ -10,13 +10,15 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { styles } from "../style/OfferStyle";
+import { useEffect, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const topDeals = [
   {
     id: "1",
     text: "Get Excited gifts on\npurchase upto $458.26",
     bgColor: "#fd7e4d",
-    image: require("../../assets/gift1.jpeg"),
+    image: require("../../assets/gift1.png"),
   },
   {
     id: "2",
@@ -27,6 +29,20 @@ const topDeals = [
 ];
 
 const OfferScreen = () => {
+  const [session, setSession] = useState();
+
+  const getSession = async () => {
+    const value = await AsyncStorage.getItem("user");
+    const token = await JSON.parse(value);
+    setSession(token);
+  };
+
+  useEffect(() => {
+    getSession();
+  }, []);
+
+  console.log(session?.user?.id);
+
   const navigation = useNavigation();
 
   return (
