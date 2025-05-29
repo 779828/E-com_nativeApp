@@ -10,12 +10,16 @@ import {
   Alert,
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
-import Icon from "react-native-vector-icons/Ionicons";
-import MaterialIcon from "react-native-vector-icons/MaterialCommunityIcons";
-import { useNavigation } from "@react-navigation/native";
-import { styles } from "../style/AccessoriesStyle";
 import { useCallback, useEffect, useState } from "react";
+
+import { Ionicons } from "@expo/vector-icons";
+
+import { useNavigation } from "@react-navigation/native";
+
+import { styles } from "../style/AccessoriesStyle";
+
 import { fetchCards, fetchCategories } from "../services/cardService";
+
 import Header from "../components/Header";
 import { useDispatch } from "react-redux";
 import { addItemToCart } from "../store/cartItemsSlice";
@@ -93,7 +97,7 @@ const AccessoriesScreen = () => {
           style={styles.addBtn}
           onPress={() => handleAddToCart(item.id)}
         >
-          <MaterialIcon name="plus" size={18} color="#fff" />
+          <Ionicons name="add" size={18} color="#fff" />
         </TouchableOpacity>
       </View>
     </TouchableOpacity>
@@ -112,7 +116,7 @@ const AccessoriesScreen = () => {
           autoCapitalize="none"
         />
         <TouchableOpacity style={styles.filterBtn}>
-          <Icon name="funnel-outline" size={18} />
+          <Ionicons name="funnel-outline" size={18} />
           <Text style={styles.filterText}>Filter by (2)</Text>
         </TouchableOpacity>
       </View>

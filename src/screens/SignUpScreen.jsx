@@ -1,7 +1,15 @@
 import { useState } from "react";
-import { View, TextInput, Button, Text, Alert, StatusBar } from "react-native";
+import {
+  View,
+  TextInput,
+  TouchableOpacity,
+  Text,
+  Alert,
+  StatusBar,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { supabase } from "../lib/supabase";
+
 import { styles } from "../style/SignUpStyle";
 
 const SignUpScreen = () => {
@@ -36,39 +44,52 @@ const SignUpScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
-      <Text style={styles.title}>Sign Up</Text>
+    <View style={styles.mainContainer}>
+      <StatusBar barStyle="dark-content" backgroundColor="#6a51ae" />
 
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        placeholderTextColor="#aaa"
-        keyboardType="email-address"
-        autoCapitalize="none"
-        onChangeText={setEmail}
-        value={email}
-      />
-
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        placeholderTextColor="#aaa"
-        secureTextEntry
-        onChangeText={setPassword}
-        value={password}
-      />
-
-      <View style={styles.buttonContainer}>
-        <Button title="Sign Up" onPress={handleSignup} color="#28A745" />
+      <View style={styles.header}>
+        <Text style={styles.headerText}>
+          Create Account to Explore Products!
+        </Text>
       </View>
+      <View style={styles.formContainer}>
+        <Text style={styles.title}>Sign Up</Text>
 
-      <View style={styles.buttonContainer}>
-        <Button
-          title="Go to Login"
-          onPress={() => navigation.navigate("Login")}
-          color="red"
-        />
+        <View style={styles.inputContainer}>
+          <Text style={styles.icon}>👤</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            placeholderTextColor="#aaa"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            onChangeText={setEmail}
+            value={email}
+          />
+        </View>
+
+        <View style={styles.inputContainer}>
+          <Text style={styles.icon}>🔒</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            placeholderTextColor="#aaa"
+            secureTextEntry
+            onChangeText={setPassword}
+            value={password}
+          />
+        </View>
+
+        <TouchableOpacity style={styles.signupButton} onPress={handleSignup}>
+          <Text style={styles.signupButtonText}>SIGN UP</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+          <Text style={styles.loginText}>
+            Already registered?{" "}
+            <Text style={styles.loginLink}>Go to Login</Text>
+          </Text>
+        </TouchableOpacity>
       </View>
     </View>
   );

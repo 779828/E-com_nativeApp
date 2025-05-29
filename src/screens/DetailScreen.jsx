@@ -8,7 +8,7 @@ import {
   StatusBar,
   Alert,
 } from "react-native";
-import Icon from "react-native-vector-icons/Ionicons";
+import { Ionicons } from "@expo/vector-icons";
 import { useRoute } from "@react-navigation/native";
 import { styles } from "../style/DetailStyle";
 import { useDispatch } from "react-redux";
@@ -52,10 +52,18 @@ const DetailsScreen = () => {
           )}
           <Image source={{ uri: product.image }} style={styles.productImage} />
           <View style={styles.iconBar}>
-            <Icon name="headset-outline" size={24} style={styles.icon} />
-            <Icon name="musical-notes-outline" size={24} style={styles.icon} />
-            <Icon name="volume-medium-outline" size={24} style={styles.icon} />
-            <Icon name="lock-closed-outline" size={24} style={styles.icon} />
+            <Ionicons name="headset-outline" size={24} style={styles.icon} />
+            <Ionicons
+              name="musical-notes-outline"
+              size={24}
+              style={styles.icon}
+            />
+            <Ionicons name="volume-medium" size={24} style={styles.icon} />
+            <Ionicons
+              name="lock-closed-outline"
+              size={24}
+              style={styles.icon}
+            />
           </View>
         </View>
 
@@ -76,13 +84,17 @@ const DetailsScreen = () => {
           </View>
 
           <View style={styles.features}>
-            <Icon
+            <Ionicons
               name="battery-charging-outline"
               size={18}
               style={styles.battery}
             />
-            <Icon name="bluetooth-outline" size={18} style={styles.battery} />
-            <Icon name="volume-high-outline" size={18} style={styles.battery} />
+            <Ionicons
+              name="bluetooth-outline"
+              size={18}
+              style={styles.battery}
+            />
+            <Ionicons name="volume-high" size={18} style={styles.battery} />
           </View>
 
           <Text style={styles.detailsLabel}>Details :</Text>

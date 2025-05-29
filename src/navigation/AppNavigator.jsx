@@ -19,6 +19,7 @@ const AppNavigator = () => {
     const init = async () => {
       try {
         const currentSession = await supabase.auth.session();
+
         setSession(currentSession);
 
         console.log(currentSession);

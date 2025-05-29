@@ -6,8 +6,9 @@ import {
   Image,
   StatusBar,
 } from "react-native";
-import Icon from "react-native-vector-icons/Ionicons";
-import MaterialIcons from "react-native-vector-icons/MaterialCommunityIcons";
+
+import { Ionicons } from "@expo/vector-icons";
+
 import { useNavigation } from "@react-navigation/native";
 import { styles } from "../style/WatchListStyle";
 
@@ -88,7 +89,7 @@ const WatchlistScreen = () => {
       <View style={styles.sideCol}>
         <Text style={styles.rating}>⭐ {item.rating}</Text>
         <TouchableOpacity style={styles.addBtn}>
-          <MaterialIcons name="plus" size={18} color="#fff" />
+          <Ionicons name="add" size={18} color="#fff" />
         </TouchableOpacity>
       </View>
     </View>
@@ -99,7 +100,7 @@ const WatchlistScreen = () => {
       <StatusBar barStyle="dark-content" backgroundColor="#6a51ae" />
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Icon name="chevron-back" size={24} />
+          <Ionicons name="chevron-back" size={24} />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>My Wishlist (5)</Text>
         <TouchableOpacity>

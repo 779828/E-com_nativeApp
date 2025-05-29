@@ -7,7 +7,7 @@ import {
   ScrollView,
   StatusBar,
 } from "react-native";
-import Icon from "react-native-vector-icons/Ionicons";
+import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { styles } from "../style/OfferStyle";
 
@@ -34,15 +34,15 @@ const OfferScreen = () => {
       <StatusBar barStyle="dark-content" backgroundColor="#6a51ae" />
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Icon name="arrow-back" size={24} />
+          <Ionicons name="chevron-back" size={24} />
         </TouchableOpacity>
         <Text style={styles.title}>Offers</Text>
         <View style={styles.icons}>
           <TouchableOpacity style={{ marginRight: 15 }}>
-            <Icon name="heart-outline" size={22} />
+            <Ionicons name="heart-outline" size={22} />
           </TouchableOpacity>
           <TouchableOpacity>
-            <Icon name="cart-outline" size={22} />
+            <Ionicons name="cart-outline" size={22} />
           </TouchableOpacity>
         </View>
       </View>

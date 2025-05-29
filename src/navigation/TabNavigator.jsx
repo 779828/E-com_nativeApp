@@ -1,5 +1,6 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Icon from "react-native-vector-icons/FontAwesome";
+
+import { Ionicons } from "@expo/vector-icons";
 
 import AccessoriesScreen from "../screens/AccessoriesScreen";
 import DetailsScreen from "../screens/DetailScreen";
@@ -39,11 +40,11 @@ const TabNavigator = () => (
         let iconName;
 
         if (route.name === "Home") iconName = "home";
-        else if (route.name === "Accessory") iconName = "th-large";
-        else if (route.name === "Offers") iconName = "bell";
-        else if (route.name === "Watchlist") iconName = "user";
+        else if (route.name === "Accessory") iconName = "bag";
+        else if (route.name === "Offers") iconName = "gift";
+        else if (route.name === "Watchlist") iconName = "bookmark";
 
-        return <Icon name={iconName} size={24} color={color} />;
+        return <Ionicons name={iconName} size={24} color={color} />;
       },
     })}
   >

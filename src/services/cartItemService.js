@@ -130,6 +130,7 @@ export const fetchCartItems = async () => {
 export const updateCartItemQuantity = async (cartItemId, quantity) => {
   try {
     const currentSession = await supabase.auth.session();
+
     if (!currentSession || !currentSession.user) {
       throw new Error("User not authenticated");
     }

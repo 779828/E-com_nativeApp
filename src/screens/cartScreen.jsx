@@ -7,7 +7,9 @@ import {
   TouchableOpacity,
   StatusBar,
 } from "react-native";
-import Icon from "react-native-vector-icons/Ionicons";
+
+import { Ionicons } from "@expo/vector-icons";
+
 import { useNavigation } from "@react-navigation/native";
 import { styles } from "../style/CartStyle";
 import { useSelector, useDispatch } from "react-redux";
@@ -77,7 +79,7 @@ const CartScreen = () => {
           style={styles.removeBtn}
           onPress={() => dispatch(removeItemFromCart(item.id))}
         >
-          <Icon name="trash-outline" size={20} color="red" />
+          <Ionicons name="trash-outline" size={20} color="red" />
         </TouchableOpacity>
       </View>
     </View>
@@ -88,7 +90,7 @@ const CartScreen = () => {
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Icon name="chevron-back" size={24} color="#000" />
+          <Ionicons name="chevron-back" size={24} color="#000" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>My Cart</Text>
         <View style={{ width: 24 }} />
