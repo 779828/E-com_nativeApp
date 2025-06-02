@@ -1,4 +1,5 @@
 import { Text, TouchableOpacity, View } from "react-native";
+
 import { styles } from "../style/HeaderStyle";
 
 import { Ionicons } from "@expo/vector-icons";
@@ -6,6 +7,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+
 import { fetchUserCart } from "../store/cartItemsSlice";
 
 const Header = () => {

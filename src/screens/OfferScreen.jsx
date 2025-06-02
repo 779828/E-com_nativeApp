@@ -10,8 +10,6 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { styles } from "../style/OfferStyle";
-import { useEffect, useState } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const topDeals = [
   {
@@ -30,19 +28,6 @@ const topDeals = [
 
 const OfferScreen = () => {
   const navigation = useNavigation();
-  const [session, setSession] = useState();
-
-  const getSession = async () => {
-    const value = await AsyncStorage.getItem("user");
-    const token = await JSON.parse(value);
-    setSession(token);
-  };
-
-  useEffect(() => {
-    getSession();
-  }, []);
-
-  console.log(session);
 
   return (
     <ScrollView style={styles.container}>

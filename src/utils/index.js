@@ -59,3 +59,21 @@
 // console.log(rev);
 
 // console.log(count);
+
+// let array = [1, 2, 3, 4, 5, 2, 3, 4, 1, 5];
+
+// let sum = array.reduce((a, b) => a + b);
+
+// console.log(sum);
+
+// for (let i = 0; i < array.length; i++) {
+//   for (let j = i + 1; j < array.length; j++) {
+//     if (array[i] > array[j]) {
+//       array[i] = array[i] + array[j];
+//       array[j] = array[i] - array[j];
+//       array[i] = array[i] - array[j];
+//     }
+//   }
+// }
+
+// console.log(array);
