@@ -16,13 +16,13 @@ import { Ionicons } from "@expo/vector-icons";
 
 import { useNavigation } from "@react-navigation/native";
 
-import { styles } from "../style/AccessoriesStyle";
+import { styles } from "../../style/AccessoriesStyle";
 
-import { fetchCards, fetchCategories } from "../services/cardService";
+import { fetchCards, fetchCategories } from "../../services/cardService";
 
-import Header from "../components/Header";
+import Header from "../../components/Header";
 import { useDispatch } from "react-redux";
-import { addItemToCart } from "../store/cartItemsSlice";
+import { addItemToCart } from "../../store/cartItemsSlice";
 
 const AccessoriesScreen = () => {
   const navigation = useNavigation();
@@ -135,14 +135,6 @@ const AccessoriesScreen = () => {
             />
           ))}
         </Picker>
-      </View>
-      <View style={styles.sortFilterRow}>
-        <TouchableOpacity style={styles.sortFilterBtn}>
-          <Text>Sort by</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.sortFilterBtn}>
-          <Text>Filter by (2)</Text>
-        </TouchableOpacity>
       </View>
     </>
   );

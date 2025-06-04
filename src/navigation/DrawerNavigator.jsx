@@ -4,7 +4,7 @@ import { supabase } from "../lib/supabase";
 import { ActivityIndicator, View } from "react-native";
 
 import TabNavigator from "./TabNavigator";
-import SettingsScreen from "../screens/SettingsScreen";
+import SettingsScreen from "../screens/Authentication/SettingsScreen";
 import CreateProductScreen from "../screens/CreateProductScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import CategorySelectionScreen from "../screens/CategorySelectionScreen";

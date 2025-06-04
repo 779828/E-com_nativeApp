@@ -11,13 +11,13 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 
 import { useNavigation } from "@react-navigation/native";
-import { styles } from "../style/CartStyle";
+import { styles } from "../../style/CartStyle";
 import { useSelector, useDispatch } from "react-redux";
 import {
   fetchUserCart,
   updateItemQuantity,
   removeItemFromCart,
-} from "../store/cartItemsSlice";
+} from "../../store/cartItemsSlice";
 
 const CartScreen = () => {
   const navigation = useNavigation();
@@ -130,7 +130,7 @@ const CartScreen = () => {
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={styles.addMoreBtn}
-              onPress={() => navigation.navigate("Accessories")}
+              onPress={() => navigation.navigate("Home")}
             >
               <Text style={styles.addMoreText}>Add More</Text>
             </TouchableOpacity>
@@ -143,9 +143,9 @@ const CartScreen = () => {
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             style={styles.addMoreBtn}
-            onPress={() => navigation.navigate("Accessories")}
+            onPress={() => navigation.navigate("Home")}
           >
-            <Text style={styles.addMoreText}>Add To Cart</Text>
+            <Text style={styles.addMoreText}>Shop Now</Text>
           </TouchableOpacity>
         </View>
       )}

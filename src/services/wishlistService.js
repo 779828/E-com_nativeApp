@@ -1,6 +1,6 @@
 import { supabase } from "../lib/supabase";
 
-export const addToCart = async (productId, quantity = 1) => {
+export const addToWishlist = async (productId) => {
   try {
     const currentSession = supabase.auth.session();
 
@@ -9,83 +9,80 @@ export const addToCart = async (productId, quantity = 1) => {
     }
 
     const userId = currentSession.user.id;
+    console.log("Adding to wishlist for user_id:", userId);
 
     const { data: existingItem, error: fetchError } = await supabase
-      .from("cart_items")
-      .select("id, quantity")
+      .from("wishlist")
+      .select("id")
       .eq("user_id", userId)
       .eq("product_id", productId)
       .single();
 
     if (fetchError && fetchError.code !== "PGRST116") {
-      console.error("Error checking cart item:", fetchError);
+      console.error("Error checking wishlist item:", fetchError);
       throw fetchError;
     }
 
     if (existingItem) {
-      const newQuantity = existingItem.quantity + quantity;
       const { data, error } = await supabase
-        .from("cart_items")
-        .update({ quantity: newQuantity })
-        .eq("id", existingItem.id)
+        .from("wishlist")
         .select(
           `
-        id,
-        quantity,
-        products (
           id,
-          name,
-          price,
-          image,
-          spec,
-          oldPrice,
-          rating,
-          discount
+          products (
+            id,
+            name,
+            price,
+            image,
+            spec,
+            oldPrice,
+            rating,
+            discount
+          )
+        `
         )
-      `
-        )
+        .eq("id", existingItem.id)
         .single();
 
       if (error) {
-        console.error("Error updating cart item:", error);
+        console.error("Error fetching existing wishlist item:", error);
         throw error;
       }
       return data;
     } else {
       const { data, error } = await supabase
-        .from("cart_items")
-        .insert([{ user_id: userId, product_id: productId, quantity }])
+        .from("wishlist")
+        .insert([{ user_id: userId, product_id: productId }])
         .select(
           `
-        id,
-        quantity,
-        products (
           id,
-          name,
-          price,
-          image,
-          spec,
-          oldPrice,
-          rating,
-          discount
-        )
-      `
+          products (
+            id,
+            name,
+            price,
+            image,
+            spec,
+            oldPrice,
+            rating,
+            discount
+          )
+        `
         )
         .single();
 
       if (error) {
-        console.error("Error adding to cart:", error);
+        console.error("Error adding to wishlist:", error);
         throw error;
       }
       return data;
     }
   } catch (error) {
-    console.error("Add to cart error:", error);
+    console.error("Add to wishlist error:", error);
     throw error;
   }
 };
 
-export const fetchCartItems = async () => {
+export const fetchWishlistItems = async () => {
   try {
     const currentSession = supabase.auth.session();
 
@@ -94,13 +91,13 @@ export const fetchCartItems = async () => {
     }
 
     const userId = currentSession.user.id;
+    console.log("Fetching wishlist for user_id:", userId);
 
     const { data, error } = await supabase
-      .from("cart_items")
+      .from("wishlist")
       .select(
         `
         id,
-        quantity,
         products (
           id,
           name,
@@ -116,63 +113,19 @@ export const fetchCartItems = async () => {
       .eq("user_id", userId);
 
     if (error) {
-      console.error("Error fetching cart items:", error);
+      console.error("Error fetching wishlist items:", error);
       throw error;
     }
 
+    console.log("Wishlist items fetched:", data);
     return data;
   } catch (error) {
-    console.error("Fetch cart items error:", error);
+    console.error("Fetch wishlist items error:", error);
     throw error;
   }
 };
 
-export const updateCartItemQuantity = async (cartItemId, quantity) => {
-  try {
-    const currentSession = supabase.auth.session();
-
-    if (!currentSession || !currentSession.user) {
-      throw new Error("User not authenticated");
-    }
-
-    const userId = currentSession.user.id;
-
-    const { data, error } = await supabase
-      .from("cart_items")
-      .update({ quantity })
-      .eq("id", cartItemId)
-      .eq("user_id", userId)
-      .select(
-        `
-        id,
-        quantity,
-        products (
-          id,
-          name,
-          price,
-          image,
-          spec,
-          oldPrice,
-          rating,
-          discount
-        )
-      `
-      )
-      .single();
-
-    if (error) {
-      console.error("Error updating cart item:", error);
-      throw error;
-    }
-
-    return data;
-  } catch (error) {
-    console.error("Update cart item error:", error);
-    throw error;
-  }
-};
-
-export const removeFromCart = async (cartItemId) => {
+export const removeFromWishlist = async (wishlistItemId) => {
   try {
     const currentSession = supabase.auth.session();
 
@@ -183,19 +136,46 @@ export const removeFromCart = async (cartItemId) => {
     const userId = currentSession.user.id;
 
     const { error } = await supabase
-      .from("cart_items")
+      .from("wishlist")
       .delete()
-      .eq("id", cartItemId)
+      .eq("id", wishlistItemId)
       .eq("user_id", userId);
 
     if (error) {
-      console.error("Error removing from cart:", error);
+      console.error("Error removing from wishlist:", error);
       throw error;
     }
 
     return true;
   } catch (error) {
-    console.error("Remove from cart error:", error);
+    console.error("Remove from wishlist error:", error);
+    throw error;
+  }
+};
+
+export const clearWishlistItems = async () => {
+  try {
+    const currentSession = supabase.auth.session();
+
+    if (!currentSession || !currentSession.user) {
+      throw new Error("User not authenticated");
+    }
+
+    const userId = currentSession.user.id;
+
+    const { error } = await supabase
+      .from("wishlist")
+      .delete()
+      .eq("user_id", userId);
+
+    if (error) {
+      console.error("Error clearing wishlist:", error);
+      throw error;
+    }
+
+    return true;
+  } catch (error) {
+    console.error("Clear wishlist error:", error);
     throw error;
   }
 };

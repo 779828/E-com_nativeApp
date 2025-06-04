@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { View, Text, Switch, Button, Alert } from "react-native";
-import { supabase } from "../lib/supabase";
-import { styles } from "../style/SettingStyle";
+import { supabase } from "../../lib/supabase";
+import { styles } from "../../style/SettingStyle";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StackActions, useNavigation } from "@react-navigation/native";
 

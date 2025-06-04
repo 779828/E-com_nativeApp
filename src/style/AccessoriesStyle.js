@@ -54,20 +54,6 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: "#fff",
   },
-  sortFilterRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 15,
-    gap: 10,
-  },
-  sortFilterBtn: {
-    flex: 1,
-    backgroundColor: "#fff",
-    padding: 10,
-    borderRadius: 10,
-    elevation: 1,
-    alignItems: "center",
-  },
   column: {
     justifyContent: "space-between",
   },
@@ -91,11 +77,15 @@ export const styles = StyleSheet.create({
   },
   productName: {
     fontWeight: "600",
+    color: "#333",
+    textAlign: "center",
     marginBottom: 2,
   },
   spec: {
-    fontSize: 12,
+    fontSize: width * 0.03,
     color: "#777",
+    textAlign: "center",
+    marginVertical: width * 0.01,
   },
   priceRow: {
     flexDirection: "row",

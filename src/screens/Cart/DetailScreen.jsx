@@ -10,10 +10,10 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useRoute } from "@react-navigation/native";
-import { styles } from "../style/DetailStyle";
+import { styles } from "../../style/DetailStyle";
 import { useDispatch } from "react-redux";
-import { addItemToCart } from "../store/cartItemsSlice";
-import Header from "../components/Header";
+import { addItemToCart } from "../../store/cartItemsSlice";
+import Header from "../../components/Header";
 
 const DetailsScreen = () => {
   const dispatch = useDispatch();

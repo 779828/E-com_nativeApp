@@ -27,7 +27,7 @@ const Header = () => {
       </TouchableOpacity>
       <Text style={styles.headerTitle}>Accessories & Details</Text>
       <View style={styles.iconGroup}>
-        <TouchableOpacity onPress={() => navigation.navigate("CartScreen")}>
+        <TouchableOpacity onPress={() => navigation.navigate("Cart")}>
           <View style={styles.cartContainer}>
             <Ionicons name="cart-outline" size={24} style={styles.icon} />
             {cartCount > 0 && (
@@ -37,12 +37,8 @@ const Header = () => {
             )}
           </View>
         </TouchableOpacity>
-        <TouchableOpacity>
-          <Ionicons
-            name="notifications-outline"
-            size={24}
-            style={styles.icon}
-          />
+        <TouchableOpacity onPress={() => navigation.navigate("Wishlist")}>
+          <Ionicons name="heart-outline" size={24} style={styles.icon} />
         </TouchableOpacity>
       </View>
     </View>

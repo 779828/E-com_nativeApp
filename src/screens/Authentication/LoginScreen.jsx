@@ -8,9 +8,9 @@ import {
   StatusBar,
   Alert,
 } from "react-native";
-import { supabase } from "../lib/supabase";
+import { supabase } from "../../lib/supabase";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { styles } from "../style/LoginStyle";
+import { styles } from "../../style/LoginStyle";
 
 const LoginScreen = () => {
   const navigation = useNavigation();

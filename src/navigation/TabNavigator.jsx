@@ -2,25 +2,36 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import { Ionicons } from "@expo/vector-icons";
 
-import AccessoriesScreen from "../screens/AccessoriesScreen";
-import DetailsScreen from "../screens/DetailScreen";
-import HomeScreen from "../screens/HomeScreen";
-import WatchlistScreen from "../screens/MyWatchList";
-import OfferScreen from "../screens/OfferScreen";
+import AccessoriesScreen from "../screens/Cart/AccessoriesScreen";
+import DetailsScreen from "../screens/Cart/DetailScreen";
+import HomeScreen from "../screens/Home/HomeScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import CartScreen from "../screens/cartScreen";
+import CartScreen from "../screens/Cart/cartScreen";
 import Header from "../components/Header";
 import { StyleSheet } from "react-native";
+import ProductList from "../screens/Home/ProductList";
+import ProfileScreen from "../screens/Profile/ProfileScreen";
+import WishlistScreen from "../screens/Wishlist/MyWatchList";
 
 const Tab = createBottomTabNavigator();
 
 const Stack = createNativeStackNavigator();
 
-const StackNavigator = () => (
+const CartStackNavigator = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Screen name="CartScreen" component={CartScreen} />
     <Stack.Screen name="Accessories" component={AccessoriesScreen} />
     <Stack.Screen name="Details" component={DetailsScreen} />
+    <Stack.Screen name="Header" component={Header} />
+  </Stack.Navigator>
+);
+
+const HomeStackNavigator = () => (
+  <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Screen name="Home" component={HomeScreen} />
+    <Stack.Screen name="ProductList" component={ProductList} />
     <Stack.Screen name="CartScreen" component={CartScreen} />
+    <Stack.Screen name="Details" component={DetailsScreen} />
     <Stack.Screen name="Header" component={Header} />
   </Stack.Navigator>
 );
@@ -40,18 +51,18 @@ const TabNavigator = () => (
         let iconName;
 
         if (route.name === "Home") iconName = "home";
-        else if (route.name === "Accessory") iconName = "bag";
-        else if (route.name === "Offers") iconName = "gift";
-        else if (route.name === "Watchlist") iconName = "bookmark";
+        else if (route.name === "Cart") iconName = "bag";
+        else if (route.name === "Wishlist") iconName = "bookmark";
+        else if (route.name === "Profile") iconName = "person-circle-outline";
 
         return <Ionicons name={iconName} size={24} color={color} />;
       },
     })}
   >
-    <Tab.Screen name="Home" component={HomeScreen} />
-    <Tab.Screen name="Accessory" component={StackNavigator} />
-    <Tab.Screen name="Offers" component={OfferScreen} />
-    <Tab.Screen name="Watchlist" component={WatchlistScreen} />
+    <Tab.Screen name="Home" component={HomeStackNavigator} />
+    <Tab.Screen name="Cart" component={CartStackNavigator} />
+    <Tab.Screen name="Wishlist" component={WishlistScreen} />
+    <Tab.Screen name="Profile" component={ProfileScreen} />
   </Tab.Navigator>
 );
 
@@ -61,8 +72,6 @@ const styles = StyleSheet.create({
     bottom: 0,
     height: 100,
     backgroundColor: "white",
-    // borderTopLeftRadius: 25,
-    // borderTopRightRadius: 25,
     paddingBottom: 10,
     paddingTop: 5,
     shadowColor: "#000",

@@ -8,9 +8,9 @@ import {
   StatusBar,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { supabase } from "../lib/supabase";
+import { supabase } from "../../lib/supabase";
 
-import { styles } from "../style/SignUpStyle";
+import { styles } from "../../style/SignUpStyle";
 
 const SignUpScreen = () => {
   const navigation = useNavigation();

@@ -14,6 +14,8 @@ export const fetchCards = async (category_id = null, searchQuery = "") => {
 
   const { data, error } = await query;
 
+  // console.log(data);
+
   if (error) {
     console.error("Error fetching cards:", error);
     throw error;
@@ -30,7 +32,7 @@ export const fetchCards = async (category_id = null, searchQuery = "") => {
 export const fetchCategories = async () => {
   const { data, error } = await supabase
     .from("categories")
-    .select("id, name")
+    .select("id, name,image,desc")
     .order("name", { ascending: true });
 
   if (error) {
