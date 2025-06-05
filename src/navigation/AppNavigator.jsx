@@ -6,7 +6,7 @@ import { supabase } from "../lib/supabase";
 
 import AuthStack from "./AuthStack";
 import DrawerNavigator from "./DrawerNavigator";
-import RoleScreen from "../screens/RoleScreens";
+import RoleScreen from "../screens/Authentication/RoleScreens";
 
 const Stack = createNativeStackNavigator();
 

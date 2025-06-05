@@ -5,9 +5,9 @@ import { ActivityIndicator, View } from "react-native";
 
 import TabNavigator from "./TabNavigator";
 import SettingsScreen from "../screens/Authentication/SettingsScreen";
-import CreateProductScreen from "../screens/CreateProductScreen";
+import CreateProductScreen from "../screens/Products/CreateProductScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import CategorySelectionScreen from "../screens/CategorySelectionScreen";
+import CategorySelectionScreen from "../screens/Products/CategorySelectionScreen";
 
 const Drawer = createDrawerNavigator();
 

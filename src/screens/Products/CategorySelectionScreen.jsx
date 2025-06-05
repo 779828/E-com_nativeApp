@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, FlatList, Alert } from "react-native";
-import { supabase } from "../lib/supabase";
-import { styles } from "../style/CategorySelectionStyle";
+import { supabase } from "../../lib/supabase";
+import { styles } from "../../style/CategorySelectionStyle";
 
 const CategorySelectionScreen = ({ navigation }) => {
   const [categories, setCategories] = useState([]);

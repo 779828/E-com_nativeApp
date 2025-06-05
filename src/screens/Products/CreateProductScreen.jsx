@@ -10,9 +10,9 @@ import {
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import * as FileSystem from "expo-file-system";
-import { createCard } from "../services/cardService";
-import { styles } from "../style/CreateProductStyle";
-import { supabase } from "../lib/supabase";
+import { createCard } from "../../services/cardService";
+import { styles } from "../../style/CreateProductStyle";
+import { supabase } from "../../lib/supabase";
 import { Picker } from "@react-native-picker/picker";
 
 const CreateProductScreen = () => {
@@ -224,6 +224,7 @@ const CreateProductScreen = () => {
             ))}
           </Picker>
         </View>
+
         <TouchableOpacity
           style={styles.chooseImageBtn}
           onPress={handleImagePick}
