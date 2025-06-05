@@ -70,9 +70,9 @@ const wishlistSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchUserWishlist.pending, (state) => {
-        state.status = "loading";
-      })
+      // .addCase(fetchUserWishlist.pending, (state) => {
+      //   state.status = "loading";
+      // })
       .addCase(fetchUserWishlist.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.items = action.payload;
@@ -93,9 +93,6 @@ const wishlistSlice = createSlice({
       })
       .addCase(addItemToWishlist.rejected, (state, action) => {
         state.error = action.payload;
-      })
-      .addCase(removeItemFromWishlist.pending, (state) => {
-        state.status = "loading";
       })
       .addCase(removeItemFromWishlist.fulfilled, (state, action) => {
         state.status = "succeeded";

@@ -9,15 +9,24 @@ import {
   TouchableOpacity,
   StyleSheet,
   StatusBar,
+  Dimensions,
 } from "react-native";
 import { fetchCategories, fetchCards } from "../../services/cardService";
 import { useNavigation } from "@react-navigation/native";
+import Carousel from "react-native-reanimated-carousel";
 
 export default function HomeScreen() {
   const navigation = useNavigation();
   const [categories, setCategories] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  const carouselItems = [
+    { id: "1", image: require("../../../assets/Banner.jpg") },
+    { id: "2", image: require("../../../assets/Banner1.jpg") },
+    { id: "3", image: require("../../../assets/Banner2.jpg") },
+  ];
 
   useEffect(() => {
     const loadData = async () => {
@@ -60,6 +69,16 @@ export default function HomeScreen() {
     </TouchableOpacity>
   );
 
+  const renderCarouselItem = ({ item }) => (
+    <View style={styles.carouselItem}>
+      <Image
+        source={item.image}
+        style={styles.carouselImage}
+        resizeMode="cover"
+      />
+    </View>
+  );
+
   return (
     <ScrollView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#6a51ae" />
@@ -74,10 +93,29 @@ export default function HomeScreen() {
       </View>
 
       <View style={styles.bannerContainer}>
-        <Image
-          source={require("../../../assets/Banner.jpg")}
-          style={styles.bannerImage}
+        <Carousel
+          width={Dimensions.get("window").width - 20}
+          height={280}
+          data={carouselItems}
+          renderItem={renderCarouselItem}
+          loop={true}
+          autoPlay={true}
+          autoPlayInterval={7000}
+          onSnapToItem={(index) => setActiveSlide(index)}
         />
+        <View style={styles.paginationContainer}>
+          {carouselItems.map((_, index) => (
+            <View
+              key={index}
+              style={[
+                styles.dotStyle,
+                activeSlide === index
+                  ? styles.activeDotStyle
+                  : styles.inactiveDotStyle,
+              ]}
+            />
+          ))}
+        </View>
       </View>
 
       <Text style={styles.sectionTitle}>Shop by Category</Text>
@@ -120,12 +158,33 @@ const styles = StyleSheet.create({
   bannerContainer: {
     paddingHorizontal: 16,
     marginTop: 10,
+    alignItems: "center",
   },
-  bannerImage: {
+  carouselItem: {
+    borderRadius: 16,
+    overflow: "hidden",
+  },
+  carouselImage: {
     width: "100%",
     height: 280,
     borderRadius: 16,
-    resizeMode: "cover",
+  },
+  paginationContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    paddingVertical: 8,
+  },
+  dotStyle: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    marginHorizontal: 4,
+  },
+  activeDotStyle: {
+    backgroundColor: "#6a51ae",
+  },
+  inactiveDotStyle: {
+    backgroundColor: "#D1D5DB",
   },
   sectionTitle: {
     fontSize: 18,

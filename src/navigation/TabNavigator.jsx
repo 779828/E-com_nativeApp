@@ -12,6 +12,7 @@ import { StyleSheet } from "react-native";
 import ProductList from "../screens/Home/ProductList";
 import ProfileScreen from "../screens/Profile/ProfileScreen";
 import WishlistScreen from "../screens/Wishlist/MyWatchList";
+import EditProfile from "../screens/Profile/EditProfile";
 
 const Tab = createBottomTabNavigator();
 
@@ -28,11 +29,18 @@ const CartStackNavigator = () => (
 
 const HomeStackNavigator = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
-    <Stack.Screen name="Home" component={HomeScreen} />
+    <Stack.Screen name="HomeScreen" component={HomeScreen} />
     <Stack.Screen name="ProductList" component={ProductList} />
     <Stack.Screen name="CartScreen" component={CartScreen} />
     <Stack.Screen name="Details" component={DetailsScreen} />
     <Stack.Screen name="Header" component={Header} />
+  </Stack.Navigator>
+);
+
+const ProfileStackNavigator = () => (
+  <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+    <Stack.Screen name="EditProfile" component={EditProfile} />
   </Stack.Navigator>
 );
 
@@ -62,7 +70,7 @@ const TabNavigator = () => (
     <Tab.Screen name="Home" component={HomeStackNavigator} />
     <Tab.Screen name="Cart" component={CartStackNavigator} />
     <Tab.Screen name="Wishlist" component={WishlistScreen} />
-    <Tab.Screen name="Profile" component={ProfileScreen} />
+    <Tab.Screen name="Profile" component={ProfileStackNavigator} />
   </Tab.Navigator>
 );
 

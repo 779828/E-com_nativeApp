@@ -18,6 +18,7 @@ import {
 import { addToCart } from "../../services/cartItemService";
 import { styles } from "../../style/WatchListStyle";
 import { fetchUserCart } from "../../store/cartItemsSlice";
+import Toast from "react-native-toast-message";
 
 const WishlistScreen = () => {
   const navigation = useNavigation();
@@ -35,7 +36,6 @@ const WishlistScreen = () => {
   const handleRemoveFromWishlist = async (wishlistItemId) => {
     try {
       await dispatch(removeItemFromWishlist(wishlistItemId)).unwrap();
-      // alert("Item removed from wishlist successfully!");
     } catch (error) {
       alert("Failed to remove item: " + error);
     }
@@ -45,7 +45,11 @@ const WishlistScreen = () => {
     try {
       await addToCart(productId, 1);
       dispatch(fetchUserCart());
-      alert("Product added to cart successfully!");
+      Toast.show({
+        type: "success",
+        text1: "Success",
+        text2: "Product added to cart successfully!",
+      });
     } catch (error) {
       alert("Failed to add to cart: " + error.message);
     }
@@ -54,7 +58,6 @@ const WishlistScreen = () => {
   const handleClearWishlist = async () => {
     try {
       await dispatch(clearUserWishlist()).unwrap();
-      alert("Wishlist cleared successfully!");
     } catch (error) {
       alert("Failed to clear wishlist: " + error);
     }
