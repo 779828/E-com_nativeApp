@@ -5,65 +5,51 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
-  StyleSheet,
   Image,
-  ActivityIndicator,
 } from "react-native";
+import { Picker } from "@react-native-picker/picker";
 import { useNavigation } from "@react-navigation/native";
 import * as ImagePicker from "expo-image-picker";
 import * as FileSystem from "expo-file-system";
 import Toast from "react-native-toast-message";
 import { supabase } from "../../lib/supabase";
-import { getProfile, updateProfile } from "../../services/profileService";
+import { createProfile } from "../../services/profileService";
+import { styles } from "../../style/CreateProfileStyle";
 
-const EditProfileScreen = () => {
+const CreateProfileScreen = () => {
   const navigation = useNavigation();
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [imageUri, setImageUri] = useState(null);
+  const [role, setRole] = useState("user");
   const [userId, setUserId] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [imageUri, setImageUri] = useState(null);
 
   useEffect(() => {
-    const fetchProfileData = async () => {
-      try {
-        setLoading(true);
+    const getUserId = async () => {
+      const session = supabase.auth.session();
 
-        const session = supabase.auth.session();
+      const fallbackId = session?.user?.id;
 
-        const userId = session?.user?.id;
-        if (!userId) {
-          throw new Error("User not authenticated");
-        }
-        setUserId(userId);
+      console.log("Fallback userId from session:", fallbackId);
 
-        const profile = await getProfile(userId);
+      setUserId(fallbackId);
 
-        if (profile) {
-          setFirstName(profile.first_name || "");
-          setLastName(profile.last_name || "");
-          setPhoneNumber(profile.phone_number || "");
-          setImageUri(profile.image_url || null);
-        } else {
-          throw new Error("Profile not found");
-        }
-      } catch (error) {
-        console.error("Error fetching profile:", error.message);
+      if (!fallbackId) {
         Toast.show({
           type: "error",
           text1: "Error",
-          text2: error.message || "Failed to load profile",
+          text2: "User not authenticated",
           position: "bottom",
           visibilityTime: 3000,
         });
-      } finally {
-        setLoading(false);
+        navigation.navigate("Login");
       }
     };
 
-    fetchProfileData();
-  }, []);
+    getUserId();
+  }, [navigation]);
 
   const requestPermissions = async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -89,16 +75,17 @@ const EditProfileScreen = () => {
       allowsEditing: true,
       aspect: [1, 1],
       quality: 0.8,
+      maxWidth: 500,
+      maxHeight: 500,
     });
 
     if (!result.canceled) {
       setImageUri(result.assets[0].uri);
-      console.log("Selected image URI:", result.assets[0].uri);
     }
   };
 
   const handleSave = async () => {
-    if (!firstName || !lastName || !phoneNumber) {
+    if (!firstName || !lastName || !phoneNumber || !role || !imageUri) {
       Toast.show({
         type: "error",
         text1: "Validation Error",
@@ -110,13 +97,11 @@ const EditProfileScreen = () => {
     }
 
     try {
-      let imageUrl = imageUri;
-      if (imageUri && imageUri.startsWith("file://")) {
+      let imageUrl = null;
+      if (imageUri) {
         const base64 = await FileSystem.readAsStringAsync(imageUri, {
           encoding: FileSystem.EncodingType.Base64,
         });
-
-        console.log("Base64 length:", base64.length);
 
         const byteCharacters = atob(base64);
         const byteNumbers = new Array(byteCharacters.length);
@@ -126,7 +111,6 @@ const EditProfileScreen = () => {
         const byteArray = new Uint8Array(byteNumbers);
 
         const fileName = `profile_${userId}_${Date.now()}.jpg`;
-        console.log("Uploading image:", fileName);
 
         const { data: uploadData, error: uploadError } = await supabase.storage
           .from("profile-image")
@@ -140,8 +124,6 @@ const EditProfileScreen = () => {
           throw new Error(`Image upload failed: ${uploadError.message}`);
         }
 
-        console.log("Image uploaded successfully:", uploadData);
-
         const { data: publicUrlData } = supabase.storage
           .from("profile-image")
           .getPublicUrl(fileName);
@@ -152,56 +134,53 @@ const EditProfileScreen = () => {
         }
 
         imageUrl = publicUrlData.publicURL;
-        console.log("Generated public URL:", imageUrl);
       }
 
-      const updatedProfile = await updateProfile(userId, {
+      const profileData = await createProfile({
+        id: userId,
         first_name: firstName,
         last_name: lastName,
         phone_number: phoneNumber,
+        role,
         image_url: imageUrl,
       });
 
-      if (updatedProfile) {
+      if (profileData) {
         Toast.show({
           type: "success",
           text1: "Success",
-          text2: "Profile updated successfully!",
+          text2: "Profile saved successfully!",
           position: "bottom",
           visibilityTime: 2000,
         });
-        navigation.navigate("ProfileScreen");
+
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "Main" }],
+        });
       } else {
-        throw new Error("Profile update returned no data");
+        throw new Error("Profile creation returned no data");
       }
     } catch (error) {
-      console.error("Profile Update Error:", error.message);
+      console.error("Profile Save Error:", error.message);
       Toast.show({
         type: "error",
         text1: "Error",
-        text2: error.message || "Failed to update profile",
+        text2: error.message || "Failed to save profile",
         position: "bottom",
         visibilityTime: 3000,
       });
     }
   };
 
-  if (loading) {
-    return (
-      <View style={styles.centeredContainer}>
-        <ActivityIndicator size="large" color="#6a51ae" />
-      </View>
-    );
-  }
-
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.profileCard}>
-        <Text style={styles.title}>Edit Profile</Text>
+      <View style={styles.card}>
+        <Text style={styles.title}>Complete Your Profile</Text>
 
         <TouchableOpacity style={styles.imagePicker} onPress={pickImage}>
           {imageUri ? (
-            <Image source={{ uri: imageUri }} style={styles.avatar} />
+            <Image source={{ uri: imageUri }} style={styles.profileImage} />
           ) : (
             <View style={styles.imagePlaceholder}>
               <Text style={styles.imagePlaceholderText}>Add Profile Image</Text>
@@ -234,103 +213,24 @@ const EditProfileScreen = () => {
           value={phoneNumber}
         />
 
-        <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
-          <Text style={styles.saveButtonText}>Save Changes</Text>
+        <Text style={styles.label}>Select Role *</Text>
+        <View style={styles.pickerWrapper}>
+          <Picker
+            selectedValue={role}
+            onValueChange={(itemValue) => setRole(itemValue)}
+            style={styles.picker}
+          >
+            <Picker.Item label="User" value="user" />
+            <Picker.Item label="Admin" value="admin" />
+          </Picker>
+        </View>
+
+        <TouchableOpacity style={styles.button} onPress={handleSave}>
+          <Text style={styles.buttonText}>Save Profile</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    padding: 20,
-    backgroundColor: "#f5f5f5",
-    justifyContent: "center",
-  },
-  profileCard: {
-    backgroundColor: "#ffffff",
-    borderRadius: 20,
-    padding: 20,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 10,
-    elevation: 5,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "600",
-    color: "#111827",
-    textAlign: "center",
-    marginBottom: 20,
-  },
-  label: {
-    fontSize: 14,
-    fontWeight: "700",
-    color: "#555",
-    marginTop: 12,
-    marginBottom: 4,
-  },
-  input: {
-    backgroundColor: "#f9f9f9",
-    borderWidth: 1,
-    borderColor: "#ddd",
-    borderRadius: 8,
-    padding: 12,
-    fontSize: 16,
-    color: "#333",
-  },
-  imagePicker: {
-    alignItems: "center",
-    marginBottom: 16,
-  },
-  avatar: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    borderWidth: 2,
-    borderColor: "#6a51ae",
-  },
-  imagePlaceholder: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    backgroundColor: "#f9f9f9",
-    borderWidth: 2,
-    borderColor: "#ddd",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  imagePlaceholderText: {
-    color: "#777",
-    fontSize: 14,
-    textAlign: "center",
-  },
-  saveButton: {
-    backgroundColor: "#6a51ae",
-    paddingVertical: 14,
-    borderRadius: 10,
-    marginTop: 24,
-    alignItems: "center",
-    shadowColor: "#6a51ae",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-    elevation: 3,
-  },
-  saveButtonText: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "600",
-  },
-  centeredContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#f5f5f5",
-  },
-});
-
-export default EditProfileScreen;
+export default CreateProfileScreen;

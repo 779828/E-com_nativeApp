@@ -27,7 +27,7 @@ export default function ProfileScreen() {
 
       const { data, error } = await supabase
         .from("profiles")
-        .select("role, first_name, last_name, phone_number")
+        .select("role, first_name, last_name, phone_number, image_url")
         .eq("id", user.id)
         .single();
 
@@ -76,13 +76,11 @@ export default function ProfileScreen() {
     <ScrollView style={styles.screen}>
       <View style={styles.container}>
         <View style={styles.profileCard}>
-          <Image
-            source={require("../../../assets/avtar.webp")}
-            style={styles.avatar}
-          />
+          <Image source={{ uri: profile.image_url }} style={styles.avatar} />
           <Text style={styles.name}>
             {profile.first_name} {profile.last_name}
           </Text>
+          <Text style={styles.phone_number}>{profile.phone_number}</Text>
           <Text style={styles.activeStatus}>{profile.role}</Text>
         </View>
 
@@ -170,6 +168,11 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "600",
     color: "#111827",
+  },
+  phone_number: {
+    fontSize: 20,
+    color: "#000",
+    marginTop: 4,
   },
   activeStatus: {
     fontSize: 20,

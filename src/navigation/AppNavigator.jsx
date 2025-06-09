@@ -6,7 +6,7 @@ import { supabase } from "../lib/supabase";
 
 import AuthStack from "./AuthStack";
 import DrawerNavigator from "./DrawerNavigator";
-import RoleScreen from "../screens/Authentication/RoleScreens";
+import CreateProfileScreen from "../screens/Profile/CreateProfileScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,7 +18,7 @@ const AppNavigator = () => {
   useEffect(() => {
     const init = async () => {
       try {
-        const currentSession = await supabase.auth.session();
+        const currentSession = supabase.auth.session();
 
         setSession(currentSession);
 
@@ -91,7 +91,7 @@ const AppNavigator = () => {
         {session ? (
           !hasProfile ? (
             <>
-              <Stack.Screen name="Role" component={RoleScreen} />
+              <Stack.Screen name="Role" component={CreateProfileScreen} />
               <Stack.Screen name="Main" component={DrawerNavigator} />
             </>
           ) : (
