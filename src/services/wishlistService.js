@@ -91,7 +91,6 @@ export const fetchWishlistItems = async () => {
     }
 
     const userId = currentSession.user.id;
-    console.log("Fetching wishlist for user_id:", userId);
 
     const { data, error } = await supabase
       .from("wishlist")
@@ -117,7 +116,6 @@ export const fetchWishlistItems = async () => {
       throw error;
     }
 
-    console.log("Wishlist items fetched:", data);
     return data;
   } catch (error) {
     console.error("Fetch wishlist items error:", error);

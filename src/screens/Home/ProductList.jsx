@@ -8,6 +8,7 @@ import {
   ActivityIndicator,
   StatusBar,
   RefreshControl,
+  Dimensions,
 } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { fetchCards } from "../../services/cardService";
@@ -21,6 +22,8 @@ import {
   fetchUserWishlist,
 } from "../../store/wishlistSlice";
 import Toast from "react-native-toast-message";
+
+const { width } = Dimensions.get("window");
 
 import { styles } from "../../style/ProductListStyle";
 
