@@ -30,7 +30,7 @@ export const fetchCards = async (category_id = null, searchQuery = "") => {
 export const fetchCategories = async () => {
   const { data, error } = await supabase
     .from("categories")
-    .select("id, name,image,desc")
+    .select("id, name, image, desc")
     .order("name", { ascending: true });
 
   if (error) {

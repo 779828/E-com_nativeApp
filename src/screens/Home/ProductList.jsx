@@ -30,8 +30,10 @@ import { styles } from "../../style/ProductListStyle";
 export default function ProductList() {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+
   const route = useRoute();
   const { categoryId } = route.params || {};
+
   const wishlist = useSelector((state) => state.wishlist.items);
   const wishlistStatus = useSelector((state) => state.wishlist.status);
   const wishlistError = useSelector((state) => state.wishlist.error);

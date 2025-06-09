@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { ActivityIndicator, View } from "react-native";
+
 import { supabase } from "../lib/supabase";
 
 import AuthStack from "./AuthStack";
 import DrawerNavigator from "./DrawerNavigator";
 import CreateProfileScreen from "../screens/Profile/CreateProfileScreen";
+import { getProfile } from "../services/profileService";
 
 const Stack = createNativeStackNavigator();
 
@@ -22,14 +24,10 @@ const AppNavigator = () => {
 
         setSession(currentSession);
 
-        console.log(currentSession);
+        const user_Id = currentSession?.user?.id;
 
-        if (currentSession?.user?.id) {
-          const { data, error } = await supabase
-            .from("profiles")
-            .select("id")
-            .eq("id", currentSession.user.id)
-            .single();
+        if (user_Id) {
+          const data = await getProfile(user_Id);
 
           if (data) {
             setHasProfile(true);
@@ -53,11 +51,7 @@ const AppNavigator = () => {
       setIsLoading(true);
 
       if (newSession?.user?.id) {
-        const { data, error } = await supabase
-          .from("profiles")
-          .select("id")
-          .eq("id", newSession.user.id)
-          .single();
+        const data = await getProfile(newSession.user.id);
 
         if (data) {
           setHasProfile(true);

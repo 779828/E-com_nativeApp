@@ -40,8 +40,8 @@ export default function HomeScreen() {
         const categoriesData = await fetchCategories();
         setCategories(categoriesData);
 
-        const id = supabase.auth.session();
-        const userId = id.user.id;
+        const session = supabase.auth.session();
+        const userId = session.user.id;
 
         const data = await getProfile(userId);
         setUser(data);
@@ -58,7 +58,6 @@ export default function HomeScreen() {
   const handleSearch = async (text) => {
     setSearchQuery(text);
     const filtered = await fetchCards(null, text);
-    setProducts(filtered);
   };
 
   const handleCategoryPress = (categoryId) => {
