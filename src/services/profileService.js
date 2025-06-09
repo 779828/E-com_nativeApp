@@ -49,7 +49,7 @@ export const getProfile = async (userId) => {
       throw error;
     }
 
-    console.log("Profile fetched:", data);
+    // console.log("Profile fetched:", data);
     return data;
   } catch (error) {
     console.error("Fetch profile error:", error);

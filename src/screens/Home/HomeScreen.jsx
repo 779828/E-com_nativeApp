@@ -15,6 +15,8 @@ import { useNavigation } from "@react-navigation/native";
 import Carousel from "react-native-reanimated-carousel";
 
 import { styles } from "../../style/HomeStyle";
+import { getProfile } from "../../services/profileService";
+import { supabase } from "../../lib/supabase";
 
 export default function HomeScreen() {
   const navigation = useNavigation();
@@ -22,6 +24,7 @@ export default function HomeScreen() {
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
   const [activeSlide, setActiveSlide] = useState(0);
+  const [user, setUser] = useState("");
 
   const carouselItems = [
     { id: "1", image: require("../../../assets/Banner.jpg") },
@@ -36,6 +39,12 @@ export default function HomeScreen() {
       try {
         const categoriesData = await fetchCategories();
         setCategories(categoriesData);
+
+        const id = supabase.auth.session();
+        const userId = id.user.id;
+
+        const data = await getProfile(userId);
+        setUser(data);
       } catch (error) {
         console.error("Problem loading data:", error);
       }
@@ -84,7 +93,7 @@ export default function HomeScreen() {
     <ScrollView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#6a51ae" />
       <View style={styles.header}>
-        <Text style={styles.greeting}>Hello 👋</Text>
+        <Text style={styles.greeting}>Hello {user.first_name} 👋</Text>
         <TextInput
           placeholder="Search products..."
           value={searchQuery}
