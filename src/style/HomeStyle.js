@@ -27,12 +27,33 @@ export const styles = StyleSheet.create({
   bannerContainer: {
     paddingHorizontal: 16,
     marginTop: 10,
+    alignItems: "center",
   },
-  bannerImage: {
+  carouselItem: {
+    borderRadius: 16,
+    overflow: "hidden",
+  },
+  carouselImage: {
     width: "100%",
     height: 280,
     borderRadius: 16,
-    resizeMode: "cover",
+  },
+  paginationContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    paddingVertical: 8,
+  },
+  dotStyle: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    marginHorizontal: 4,
+  },
+  activeDotStyle: {
+    backgroundColor: "#6a51ae",
+  },
+  inactiveDotStyle: {
+    backgroundColor: "#D1D5DB",
   },
   sectionTitle: {
     fontSize: 18,
@@ -51,6 +72,7 @@ export const styles = StyleSheet.create({
     borderRadius: 16,
     padding: 10,
     marginRight: 12,
+    justifyContent: "center",
     alignItems: "center",
     elevation: 2,
     width: 200,
@@ -61,6 +83,8 @@ export const styles = StyleSheet.create({
     height: 90,
     borderRadius: 30,
     marginBottom: 8,
+    borderWidth: 1,
+    borderColor: "#e0e0e0",
   },
   categoryName: {
     fontSize: 14,

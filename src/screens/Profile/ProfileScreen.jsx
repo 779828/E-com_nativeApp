@@ -6,12 +6,13 @@ import {
   Image,
   TouchableOpacity,
   Alert,
-  StyleSheet,
   ScrollView,
 } from "react-native";
 import { supabase } from "../../lib/supabase";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
+
+import { styles } from "../../style/ProfileStyle";
 
 export default function ProfileScreen() {
   const [profile, setProfile] = useState(null);
