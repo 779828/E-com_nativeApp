@@ -13,6 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 
 import { styles } from "../../style/ProfileStyle";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function ProfileScreen() {
   const [profile, setProfile] = useState(null);
@@ -43,12 +44,16 @@ export default function ProfileScreen() {
 
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut();
+    await AsyncStorage.removeItem("user");
     if (error) {
       Alert.alert("Logout failed", error.message);
     } else {
-      navigation.reset({
-        index: 0,
-        routes: [{ name: "Auth" }],
+      navigation.dispatch({
+        ...StackActions.reset({
+          index: 0,
+          routes: [{ name: "Auth" }],
+        }),
+        target: navigation.getRootState().key,
       });
     }
   };
