@@ -2,17 +2,24 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import { Ionicons } from "@expo/vector-icons";
 
-import AccessoriesScreen from "../screens/Cart/AccessoriesScreen";
-import DetailsScreen from "../screens/Cart/DetailScreen";
-import HomeScreen from "../screens/Home/HomeScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import CartScreen from "../screens/Cart/cartScreen";
-import Header from "../components/Header";
+
 import { StyleSheet } from "react-native";
+
+import Header from "../components/Header";
+
+import DetailsScreen from "../screens/Home/DetailScreen";
+import HomeScreen from "../screens/Home/HomeScreen";
 import ProductList from "../screens/Home/ProductList";
+
 import ProfileScreen from "../screens/Profile/ProfileScreen";
-import WishlistScreen from "../screens/Wishlist/MyWatchList";
 import EditProfile from "../screens/Profile/EditProfile";
+
+import CartScreen from "../screens/Cart/cartScreen";
+
+import WishlistScreen from "../screens/Wishlist/MyWatchList";
+import CheckoutScreen from "../screens/Cart/CheckoutScreen";
+import OrderConfirmationScreen from "../screens/Cart/OrderHistoryScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -21,9 +28,11 @@ const Stack = createNativeStackNavigator();
 const CartStackNavigator = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
     <Stack.Screen name="CartScreen" component={CartScreen} />
-    <Stack.Screen name="Accessories" component={AccessoriesScreen} />
-    <Stack.Screen name="Details" component={DetailsScreen} />
-    <Stack.Screen name="Header" component={Header} />
+    <Stack.Screen name="Checkout" component={CheckoutScreen} />
+    <Stack.Screen
+      name="OrderConfirmation"
+      component={OrderConfirmationScreen}
+    />
   </Stack.Navigator>
 );
 
@@ -31,7 +40,6 @@ const HomeStackNavigator = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
     <Stack.Screen name="HomeScreen" component={HomeScreen} />
     <Stack.Screen name="ProductList" component={ProductList} />
-    <Stack.Screen name="CartScreen" component={CartScreen} />
     <Stack.Screen name="Details" component={DetailsScreen} />
     <Stack.Screen name="Header" component={Header} />
   </Stack.Navigator>
@@ -41,6 +49,10 @@ const ProfileStackNavigator = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
     <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
     <Stack.Screen name="EditProfile" component={EditProfile} />
+    <Stack.Screen
+      name="OrderConfirmation"
+      component={OrderConfirmationScreen}
+    />
   </Stack.Navigator>
 );
 

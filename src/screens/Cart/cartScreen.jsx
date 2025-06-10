@@ -7,9 +7,7 @@ import {
   TouchableOpacity,
   StatusBar,
 } from "react-native";
-
 import { Ionicons } from "@expo/vector-icons";
-
 import { useNavigation } from "@react-navigation/native";
 import { styles } from "../../style/CartStyle";
 import { useSelector, useDispatch } from "react-redux";
@@ -22,7 +20,7 @@ import {
 const CartScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const { items, status, error } = useSelector((state) => state.cartItem);
+  const { items, error } = useSelector((state) => state.cartItem);
 
   useEffect(() => {
     dispatch(fetchUserCart());
@@ -46,7 +44,6 @@ const CartScreen = () => {
     (sum, item) => sum + item.products.price * item.quantity,
     0
   );
-
   const shipping = 0;
   const total = subtotal + shipping;
 
@@ -111,7 +108,7 @@ const CartScreen = () => {
       )}
 
       {subtotal ? (
-        <View>
+        <View style={styles.footer}>
           <View style={styles.summary}>
             <View style={styles.summaryRow}>
               <Text style={styles.summaryLabel}>Subtotal</Text>
@@ -119,7 +116,7 @@ const CartScreen = () => {
             </View>
             <View style={styles.summaryRow}>
               <Text style={styles.summaryLabel}>Shipping</Text>
-              <Text style={styles.shippingValue}>Free</Text>
+              <Text style={styles.summaryValue}>Free</Text>
             </View>
             <View style={styles.summaryRow}>
               <Text style={styles.summaryLabel}>Total</Text>
@@ -134,7 +131,10 @@ const CartScreen = () => {
             >
               <Text style={styles.addMoreText}>Add More</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.checkoutBtn}>
+            <TouchableOpacity
+              style={styles.checkoutBtn}
+              onPress={() => navigation.navigate("Checkout")}
+            >
               <Text style={styles.checkoutText}>Checkout</Text>
             </TouchableOpacity>
           </View>

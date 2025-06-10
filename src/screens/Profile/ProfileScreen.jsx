@@ -111,7 +111,7 @@ export default function ProfileScreen() {
 
           <TouchableOpacity
             style={styles.optionRow}
-            // onPress={() => navigation.navigate("OrderHistory")}
+            onPress={() => navigation.navigate("OrderConfirmation")}
           >
             <Ionicons name="time-outline" size={22} color="#4B5563" />
             <Text style={styles.optionLabel}>Order History</Text>
