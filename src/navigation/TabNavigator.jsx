@@ -19,7 +19,7 @@ import CartScreen from "../screens/Cart/cartScreen";
 
 import WishlistScreen from "../screens/Wishlist/MyWatchList";
 import CheckoutScreen from "../screens/Cart/CheckoutScreen";
-import OrderConfirmationScreen from "../screens/Cart/OrderHistoryScreen";
+import OrderHistoryScreen from "../screens/Cart/OrderHistoryScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -29,10 +29,7 @@ const CartStackNavigator = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
     <Stack.Screen name="CartScreen" component={CartScreen} />
     <Stack.Screen name="Checkout" component={CheckoutScreen} />
-    <Stack.Screen
-      name="OrderConfirmation"
-      component={OrderConfirmationScreen}
-    />
+    <Stack.Screen name="OrderHistory" component={OrderHistoryScreen} />
   </Stack.Navigator>
 );
 
@@ -49,10 +46,7 @@ const ProfileStackNavigator = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
     <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
     <Stack.Screen name="EditProfile" component={EditProfile} />
-    <Stack.Screen
-      name="OrderConfirmation"
-      component={OrderConfirmationScreen}
-    />
+    <Stack.Screen name="OrderHistory" component={OrderHistoryScreen} />
   </Stack.Navigator>
 );
 

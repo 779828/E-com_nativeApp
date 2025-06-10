@@ -8,12 +8,12 @@ import {
   Alert,
   ScrollView,
 } from "react-native";
-import { supabase } from "../../lib/supabase";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
-
-import { styles } from "../../style/ProfileStyle";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
+import { supabase } from "../../lib/supabase";
+import { styles } from "../../style/ProfileStyle";
 
 export default function ProfileScreen() {
   const [profile, setProfile] = useState(null);
@@ -111,7 +111,7 @@ export default function ProfileScreen() {
 
           <TouchableOpacity
             style={styles.optionRow}
-            onPress={() => navigation.navigate("OrderConfirmation")}
+            onPress={() => navigation.navigate("OrderHistory")}
           >
             <Ionicons name="time-outline" size={22} color="#4B5563" />
             <Text style={styles.optionLabel}>Order History</Text>
