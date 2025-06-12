@@ -4,6 +4,7 @@ import {
   fetchCartItems,
   updateCartItemQuantity,
   removeFromCart,
+  clearCartItem,
 } from "../services/cartItemService";
 
 export const addItemToCart = createAsyncThunk(
@@ -48,6 +49,18 @@ export const removeItemFromCart = createAsyncThunk(
     try {
       await removeFromCart(cartItemId);
       return cartItemId;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const clearCartItems = createAsyncThunk(
+  "cart/clearCartItems",
+  async (_, { rejectWithValue }) => {
+    try {
+      await clearCartItem();
+      return true;
     } catch (error) {
       return rejectWithValue(error.message);
     }

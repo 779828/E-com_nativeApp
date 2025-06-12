@@ -125,6 +125,9 @@ const CreateProductScreen = () => {
         imageUrl = urlData?.publicURL;
       }
 
+      const session = supabase.auth.session();
+      const user = session?.user;
+
       const data = await createCard({
         name: form.name,
         spec: form.spec,
@@ -134,6 +137,7 @@ const CreateProductScreen = () => {
         discount: parseFloat(form.discount),
         image: imageUrl,
         category_id: form.category_id,
+        user_id: user?.id || null,
       });
 
       if (data) {
@@ -147,6 +151,7 @@ const CreateProductScreen = () => {
           discount: "",
           image: "",
           category_id: null,
+          user_id: null,
         });
       } else {
         Alert.alert("Error", "Failed to create product");

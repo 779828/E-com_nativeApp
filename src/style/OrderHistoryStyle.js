@@ -4,8 +4,14 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingHorizontal: 16,
     paddingTop: 40,
+    marginBottom: 100,
+  },
+  hrLine: {
+    marginBottom: 20,
+    borderBottomColor: "black",
+    borderBottomWidth: 1,
+    width: "100%",
   },
   header: {
     flexDirection: "row",
@@ -20,6 +26,7 @@ export const styles = StyleSheet.create({
   },
   section: {
     marginBottom: 20,
+    paddingHorizontal: 10,
   },
   sectionTitle: {
     fontSize: 18,
@@ -95,10 +102,9 @@ export const styles = StyleSheet.create({
   },
   footer: {
     position: "absolute",
-    bottom: 20,
+    bottom: 0,
     left: 16,
     right: 16,
-    marginBottom: 90,
   },
   continueBtn: {
     backgroundColor: "#000",

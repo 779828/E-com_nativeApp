@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   StatusBar,
+  RefreshControl,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,10 +29,18 @@ const WishlistScreen = () => {
     status,
     error,
   } = useSelector((state) => state.wishlist);
+  const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
     dispatch(fetchUserWishlist());
   }, [dispatch]);
+
+  const onRefresh = () => {
+    setRefreshing(true);
+
+    dispatch(fetchUserWishlist());
+    setRefreshing(false);
+  };
 
   const handleRemoveFromWishlist = async (wishlistItemId) => {
     try {
@@ -145,6 +154,13 @@ const WishlistScreen = () => {
           renderItem={renderItem}
           keyExtractor={(item) => item.id.toString()}
           contentContainerStyle={{ paddingBottom: 100 }}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={onRefresh}
+              colors={["#007BFF"]}
+            />
+          }
         />
       )}
     </View>

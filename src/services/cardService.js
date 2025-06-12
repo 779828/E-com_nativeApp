@@ -51,7 +51,10 @@ export const createCard = async ({
   discount,
   image,
   category_id,
+  user_id,
 }) => {
+  console.log(user_id, "user_id in createCard");
+
   const { data, error } = await supabase
     .from("products")
     .insert([
@@ -64,6 +67,7 @@ export const createCard = async ({
         discount,
         image,
         category_id,
+        user_id,
       },
     ])
     .select()

@@ -12,7 +12,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { Ionicons } from "@expo/vector-icons";
 import { styles } from "../../style/CheckoutStyle";
 import { supabase } from "../../lib/supabase";
-import { clearCart } from "../../store/cartItemsSlice";
+import { clearCart, clearCartItems } from "../../store/cartItemsSlice";
+import { addToOrder } from "../../services/orderService";
 
 const CheckoutScreen = () => {
   const navigation = useNavigation();
@@ -21,7 +22,11 @@ const CheckoutScreen = () => {
   const [loading, setLoading] = useState(false);
 
   const subtotal = items.reduce(
-    (sum, item) => sum + item.products.price * item.quantity,
+    (sum, item) =>
+      sum +
+      (item.products?.price
+        ? parseFloat(item.products.price) * item.quantity
+        : 0),
     0
   );
   const total = subtotal;
@@ -57,42 +62,59 @@ const CheckoutScreen = () => {
 
   const handlePlaceOrder = async () => {
     setLoading(true);
+
     try {
-      const data = supabase.auth.session();
+      const session = supabase.auth.session();
+      const user = session?.user;
 
-      const user = data?.user;
-
-      if (!data) {
+      if (!user) {
         Alert.alert("Error", "You must be logged in to checkout.");
-        navigation.navigate("Login");
+        navigation.navigate("Auth");
         return;
       }
 
-      const orderItems = items.map((item) => ({
-        product_id: item.products.id,
+      if (!items || items.length === 0) {
+        Alert.alert("Error", "Your cart is empty.");
+        return;
+      }
+
+      const selectedAddressData = addresses.find(
+        (addr) => addr.key === selectedAddress
+      );
+
+      const paymentMethod =
+        selectedPayment === "cod" ? "Cash on Delivery" : "Credit/Debit Card";
+
+      const ordersToInsert = items.map((item) => ({
+        user_id: user.id,
+        total: (parseFloat(item.products.price) * item.quantity).toFixed(2),
         quantity: item.quantity,
-        price: item.products.price,
-        name: item.products.name,
+        status: "confirmed",
+        payment_method: paymentMethod,
+        product_id: item.products.id,
+        address: {
+          title: selectedAddressData.title,
+          subtitle: selectedAddressData.subtitle,
+        },
       }));
 
-      const { error: orderError } = await supabase.from("orders").insert([
-        {
-          user_id: user.id,
-          total: total.toFixed(2),
-          status: "confirmed",
-          items: orderItems,
-          payment_method: "COD",
-        },
-      ]);
+      console.log(ordersToInsert);
+
+      if (ordersToInsert.length === 0) {
+        throw new Error(
+          "No valid items to place an order. Check your cart for invalid items."
+        );
+      }
+
+      const { error: orderError } = await addToOrder(ordersToInsert);
 
       if (orderError) {
         throw new Error(orderError.message);
       }
 
-      const { error: deleteError } = await supabase
-        .from("cart_items")
-        .delete()
-        .eq("user_id", user.id);
+      const ordersPlaced = ordersToInsert.length;
+
+      const { error: deleteError } = dispatch(clearCartItems());
 
       if (deleteError) {
         throw new Error(deleteError.message);
@@ -103,7 +125,9 @@ const CheckoutScreen = () => {
       Toast.show({
         type: "success",
         text1: "Success",
-        text2: "Order placed successfully! You will pay with Cash on Delivery.",
+        text2: `Order${
+          ordersPlaced > 1 ? "s" : ""
+        } placed successfully! You will pay with ${paymentMethod}.`,
         visibilityTime: 5000,
       });
 

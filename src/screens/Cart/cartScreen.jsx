@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   StatusBar,
+  RefreshControl,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -22,8 +23,15 @@ const CartScreen = () => {
   const dispatch = useDispatch();
   const { items, error } = useSelector((state) => state.cartItem);
 
+  const [refresh, setRefresh] = useState(false);
+
   useEffect(() => {
     dispatch(fetchUserCart());
+  }, [dispatch]);
+
+  const onRefresh = useCallback(() => {
+    setRefresh(true);
+    dispatch(fetchUserCart()).finally(() => setRefresh(false));
   }, [dispatch]);
 
   const handleUpdateQuantity = async (cartItemId, quantity) => {
@@ -103,6 +111,13 @@ const CartScreen = () => {
           contentContainerStyle={styles.cartList}
           ListEmptyComponent={
             <Text style={styles.emptyText}>Your cart is empty.</Text>
+          }
+          refreshControl={
+            <RefreshControl
+              refreshing={refresh}
+              onRefresh={onRefresh}
+              colors={["#007BFF"]}
+            />
           }
         />
       )}

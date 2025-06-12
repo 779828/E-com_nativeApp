@@ -19,6 +19,7 @@ const toastConfig = {
         shadowOpacity: 0.2,
         shadowRadius: 4,
         elevation: 5,
+        height: 80,
         width: "90%",
       }}
       contentContainerStyle={{ paddingHorizontal: 15 }}
@@ -47,6 +48,7 @@ const toastConfig = {
         shadowOpacity: 0.2,
         shadowRadius: 4,
         elevation: 5,
+        height: 80,
         width: "90%",
       }}
       contentContainerStyle={{ paddingHorizontal: 15 }}

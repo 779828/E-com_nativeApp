@@ -48,7 +48,7 @@ export default function ProductList() {
       try {
         const productsData = await fetchCards(categoryId);
         setProducts(productsData);
-        await dispatch(fetchUserWishlist()).unwrap();
+        // await dispatch(fetchUserWishlist()).unwrap();
       } catch (error) {
         console.error("Error loading data:", error);
         Toast.show({
@@ -69,7 +69,7 @@ export default function ProductList() {
     try {
       const productsData = await fetchCards(categoryId);
       setProducts(productsData);
-      await dispatch(fetchUserWishlist()).unwrap();
+      // await dispatch(fetchUserWishlist()).unwrap();
     } catch (error) {
       console.error("Error refreshing:", error);
       Toast.show({

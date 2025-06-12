@@ -199,3 +199,30 @@ export const removeFromCart = async (cartItemId) => {
     throw error;
   }
 };
+
+export const clearCartItem = async () => {
+  try {
+    const currentSession = supabase.auth.session();
+
+    if (!currentSession || !currentSession.user) {
+      throw new Error("User not authenticated");
+    }
+
+    const userId = currentSession.user.id;
+
+    const { error } = await supabase
+      .from("cart_items")
+      .delete()
+      .eq("user_id", userId);
+
+    if (error) {
+      console.error("Error clearing cart items:", error);
+      throw error;
+    }
+
+    return true;
+  } catch (error) {
+    console.error("Clear cart items error:", error);
+    throw error;
+  }
+};
