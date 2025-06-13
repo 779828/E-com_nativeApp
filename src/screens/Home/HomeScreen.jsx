@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   StatusBar,
   Dimensions,
+  RefreshControl,
 } from "react-native";
 import { fetchCategories, fetchCards } from "../../services/cardService";
 import { useNavigation } from "@react-navigation/native";
@@ -47,6 +48,18 @@ export default function HomeScreen() {
       setLoading(false);
     };
     loadData();
+  }, []);
+
+  const onRefresh = useCallback(async () => {
+    setLoading(true);
+    try {
+      const categoriesData = await fetchCategories();
+      setCategories(categoriesData);
+    } catch (error) {
+      console.error("Error refreshing:", error);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   const handleSearch = async (text) => {
@@ -127,6 +140,13 @@ export default function HomeScreen() {
         numColumns={2}
         columnWrapperStyle={styles.columnWrapper}
         contentContainerStyle={styles.categoryList}
+        refreshControl={
+          <RefreshControl
+            refreshing={loading}
+            onRefresh={onRefresh}
+            colors={["#6a51ae"]}
+          />
+        }
       />
     </View>
   );

@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import AppNavigator from "./navigation/AppNavigator";
 import { store } from "./store/store";
 import Toast, { BaseToast, ErrorToast } from "react-native-toast-message";
+import { NavigationContainer } from "@react-navigation/native";
 
 const toastConfig = {
   success: ({ text1, text2, ...rest }) => (
@@ -70,8 +71,10 @@ const toastConfig = {
 export default function App() {
   return (
     <Provider store={store}>
-      <AppNavigator />
-      <Toast config={toastConfig} />
+      <NavigationContainer>
+        <AppNavigator />
+        <Toast config={toastConfig} />
+      </NavigationContainer>
     </Provider>
   );
 }

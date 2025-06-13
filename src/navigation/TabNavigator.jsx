@@ -29,7 +29,6 @@ const CartStackNavigator = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
     <Stack.Screen name="CartScreen" component={CartScreen} />
     <Stack.Screen name="Checkout" component={CheckoutScreen} />
-    {/* <Stack.Screen name="OrderHistory" component={OrderHistoryScreen} /> */}
   </Stack.Navigator>
 );
 

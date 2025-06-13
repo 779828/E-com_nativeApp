@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { ActivityIndicator, View } from "react-native";
 
@@ -80,22 +79,20 @@ const AppNavigator = () => {
   }
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {session ? (
-          !hasProfile ? (
-            <>
-              <Stack.Screen name="Role" component={CreateProfileScreen} />
-              <Stack.Screen name="Main" component={DrawerNavigator} />
-            </>
-          ) : (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      {session ? (
+        !hasProfile ? (
+          <>
+            <Stack.Screen name="Role" component={CreateProfileScreen} />
             <Stack.Screen name="Main" component={DrawerNavigator} />
-          )
+          </>
         ) : (
-          <Stack.Screen name="Auth" component={AuthStack} />
-        )}
-      </Stack.Navigator>
-    </NavigationContainer>
+          <Stack.Screen name="Main" component={DrawerNavigator} />
+        )
+      ) : (
+        <Stack.Screen name="Auth" component={AuthStack} />
+      )}
+    </Stack.Navigator>
   );
 };
 
