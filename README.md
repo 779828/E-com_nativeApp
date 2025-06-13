@@ -39,12 +39,25 @@ For Android: npm run android
 Usage
 
 Login: Use your email and password to log in. New users can sign up via the "Sign Up Now" link.
+![LoginScreen](https://github.com/user-attachments/assets/2fc5052a-f81c-4b47-9d89-7b488c6f15db)
+
 Home: Browse categories like Electronics, Fashion, and Grocery, and view promotional banners.
+![HomeScreen](https://github.com/user-attachments/assets/85619e19-5ae0-4694-9850-cceaea725426)
+
 Product List: Select a category to view products, add them to your cart or wishlist.
+![ProductListScreen](https://github.com/user-attachments/assets/f6aa82ec-3d0d-42d9-94df-00b2e7e437ba)
+
 Cart: Manage items in your cart, adjust quantities, and proceed to checkout.
+![CartScreen](https://github.com/user-attachments/assets/bf6bf9f7-aeab-4385-8219-967eba4313b7)
+
 Wishlist: View and manage your saved products.
+![WishlistScreen](https://github.com/user-attachments/assets/c030f9d9-0b85-4f4e-a312-2cbb2ecb84e0)
+
 Order History: Check past orders with details like product, price, and status.
+![OrderHistoryScreen](https://github.com/user-attachments/assets/0f20d42d-b2c7-43b0-80a1-620dd21f470b)
+
 Profile: Edit your profile, view your wishlist, order history, and logout.
+![ProfileScreen](https://github.com/user-attachments/assets/38fbbbe6-8d00-47ce-b924-6f242b77f256)
 
 Screens
 LoginScreen
