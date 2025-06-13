@@ -15,7 +15,7 @@ Responsive Design: Optimized for mobile devices with a clean UI.
 Installation
 
 Clone the Repository:
-git clone https://github.com/your-username/ecommerce-app.git
+git clone (https://github.com/779828/E-com_nativeApp)
 cd ecommerce-app
 
 Install Dependencies:
