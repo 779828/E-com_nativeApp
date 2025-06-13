@@ -34,7 +34,7 @@ const CreateProductScreen = () => {
       const { data, error } = await supabase
         .from("categories")
         .select("id, name")
-        .in("name", ["Android Phones", "iPhones"]);
+        .in("name", ["Grocery", "Electronics", "Fashion"]);
       if (error) {
         console.error("Error fetching categories:", error);
         Alert.alert("Error", "Failed to load categories");

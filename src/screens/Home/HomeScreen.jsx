@@ -3,7 +3,6 @@ import {
   View,
   Text,
   TextInput,
-  ScrollView,
   FlatList,
   Image,
   TouchableOpacity,
@@ -13,10 +12,10 @@ import {
 import { fetchCategories, fetchCards } from "../../services/cardService";
 import { useNavigation } from "@react-navigation/native";
 import Carousel from "react-native-reanimated-carousel";
-
-import { styles } from "../../style/HomeStyle";
 import { getProfile } from "../../services/profileService";
 import { supabase } from "../../lib/supabase";
+
+import { styles } from "../../style/HomeStyle";
 
 export default function HomeScreen() {
   const navigation = useNavigation();
@@ -35,23 +34,18 @@ export default function HomeScreen() {
   useEffect(() => {
     const loadData = async () => {
       setLoading(true);
-
       try {
         const categoriesData = await fetchCategories();
         setCategories(categoriesData);
-
         const session = supabase.auth.session();
         const userId = session.user.id;
-
         const data = await getProfile(userId);
         setUser(data);
       } catch (error) {
         console.error("Problem loading data:", error);
       }
-
       setLoading(false);
     };
-
     loadData();
   }, []);
 
@@ -89,7 +83,7 @@ export default function HomeScreen() {
   );
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#6a51ae" />
       <View style={styles.header}>
         <Text style={styles.greeting}>Hello {user.first_name} 👋</Text>
@@ -100,7 +94,6 @@ export default function HomeScreen() {
           style={styles.searchInput}
         />
       </View>
-
       <View style={styles.bannerContainer}>
         <Carousel
           width={Dimensions.get("window").width - 20}
@@ -126,16 +119,15 @@ export default function HomeScreen() {
           ))}
         </View>
       </View>
-
       <Text style={styles.sectionTitle}>Shop by Category</Text>
       <FlatList
-        horizontal
         data={categories}
         keyExtractor={(item) => item.id.toString()}
         renderItem={renderCategory}
-        showsHorizontalScrollIndicator={false}
+        numColumns={2}
+        columnWrapperStyle={styles.columnWrapper}
         contentContainerStyle={styles.categoryList}
       />
-    </ScrollView>
+    </View>
   );
 }

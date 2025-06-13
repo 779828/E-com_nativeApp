@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 
 export const styles = StyleSheet.create({
   container: {
@@ -63,20 +63,24 @@ export const styles = StyleSheet.create({
     marginBottom: 10,
     color: "#1F2937",
   },
-  categoryList: {
+  columnWrapper: {
+    justifyContent: "space-between",
     paddingHorizontal: 16,
+    marginBottom: 16,
+  },
+  categoryList: {
     paddingVertical: 10,
   },
   categoryCard: {
     backgroundColor: "#fff",
     borderRadius: 16,
     padding: 10,
-    marginRight: 12,
     justifyContent: "center",
     alignItems: "center",
     elevation: 2,
-    width: 200,
+    width: (Dimensions.get("window").width - 48) / 2,
     height: 150,
+    marginBottom: 16,
   },
   categoryImage: {
     width: 90,
