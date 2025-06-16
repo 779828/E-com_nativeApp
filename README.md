@@ -33,7 +33,6 @@ export const supabase = createClient(supabaseUrl, supabaseKey);
 Run the App:
 npm start
 
-For iOS: npm run ios
 For Android: npm run android
 
 Usage
