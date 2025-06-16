@@ -50,6 +50,9 @@ Product List: Select a category to view products, add them to your cart or wishl
 Cart: Manage items in your cart, adjust quantities, and proceed to checkout.
 ![CartScreen](https://github.com/user-attachments/assets/bf6bf9f7-aeab-4385-8219-967eba4313b7)
 
+Checkout Screen: To finalize a purchase by collecting necessary information and facilitating payment.
+![Checkout Screen](https://github.com/user-attachments/assets/9dcd7cff-288e-4462-a7cf-3534d1633f87)
+
 Wishlist: View and manage your saved products.
 ![WishlistScreen](https://github.com/user-attachments/assets/c030f9d9-0b85-4f4e-a312-2cbb2ecb84e0)
 
