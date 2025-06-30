@@ -1,4 +1,4 @@
-const array = [1, 2, 3, 4, 5];
+// const array = [1, 2, 3, 4, 5];
 
 // const dup = [];
 
@@ -78,7 +78,7 @@ const array = [1, 2, 3, 4, 5];
 
 // console.log(array);
 
-const double = array.map((num) => num * 2);
-console.log(double);
-const square = array.map((num) => num * num);
-console.log(square);
+// const double = array.map((num) => num * 2);
+// console.log(double);
+// const square = array.map((num) => num * num);
+// console.log(square);

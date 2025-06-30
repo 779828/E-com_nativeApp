@@ -36,43 +36,44 @@ const LoginScreen = () => {
       <View style={styles.header}>
         <Text style={styles.headerText}>Welcome To E-Commerce.</Text>
       </View>
+      <View style={styles.bottom}>
+        <View style={styles.formContainer}>
+          <Text style={styles.title}>Login</Text>
 
-      <View style={styles.formContainer}>
-        <Text style={styles.title}>Login</Text>
+          <View style={styles.inputContainer}>
+            <Text style={styles.icon}>👤</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Email"
+              placeholderTextColor="#aaa"
+              onChangeText={setEmail}
+              keyboardType="email-address"
+              autoCapitalize="none"
+            />
+          </View>
 
-        <View style={styles.inputContainer}>
-          <Text style={styles.icon}>👤</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Email"
-            placeholderTextColor="#aaa"
-            onChangeText={setEmail}
-            keyboardType="email-address"
-            autoCapitalize="none"
-          />
+          <View style={styles.inputContainer}>
+            <Text style={styles.icon}>🔒</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Password"
+              placeholderTextColor="#aaa"
+              secureTextEntry
+              onChangeText={setPassword}
+            />
+          </View>
+
+          <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
+            <Text style={styles.loginButtonText}>LOGIN</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
+            <Text style={styles.signupText}>
+              Not yet registered?{" "}
+              <Text style={styles.signupLink}>Sign Up Now</Text>
+            </Text>
+          </TouchableOpacity>
         </View>
-
-        <View style={styles.inputContainer}>
-          <Text style={styles.icon}>🔒</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Password"
-            placeholderTextColor="#aaa"
-            secureTextEntry
-            onChangeText={setPassword}
-          />
-        </View>
-
-        <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-          <Text style={styles.loginButtonText}>LOGIN</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
-          <Text style={styles.signupText}>
-            Not yet registered?{" "}
-            <Text style={styles.signupLink}>Sign Up Now</Text>
-          </Text>
-        </TouchableOpacity>
       </View>
     </View>
   );

@@ -3,11 +3,10 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: "#e5e5e5",
+    backgroundColor: "#6a51ae",
   },
   header: {
-    backgroundColor: "#6a51ae",
-    height: "40%",
+    height: "25%",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -16,12 +15,17 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
   },
+  bottom: {
+    backgroundColor: "#f5f5f5",
+    height: "100%",
+    borderTopLeftRadius: 140,
+  },
   formContainer: {
     backgroundColor: "#fff",
     borderRadius: 20,
     padding: 20,
     marginHorizontal: 20,
-    marginTop: -50,
+    marginTop: 100,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
