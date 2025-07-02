@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
     borderTopLeftRadius: 140,
   },
   formContainer: {
-    backgroundColor: "#fff",
+    // backgroundColor: "#fff",
     borderRadius: 20,
     padding: 20,
     marginHorizontal: 20,
@@ -30,7 +30,7 @@ export const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 5,
-    elevation: 5,
+    // elevation: 5,
     alignItems: "center",
   },
   title: {

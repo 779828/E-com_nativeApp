@@ -109,7 +109,8 @@ export const fetchCartItems = async () => {
           oldPrice,
           rating,
           discount,
-          image
+          image,
+          user_id
         )
       `
       )
@@ -119,6 +120,8 @@ export const fetchCartItems = async () => {
       console.error("Error fetching cart items:", error);
       throw error;
     }
+
+    console.log(data);
 
     return data;
   } catch (error) {

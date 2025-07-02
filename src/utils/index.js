@@ -82,3 +82,21 @@
 // console.log(double);
 // const square = array.map((num) => num * num);
 // console.log(square);
+
+function mul(x) {
+  return function (y) {
+    return x * y;
+  };
+}
+
+console.log(mul(4)(0));
+console.log(mul(4)(1));
+console.log(mul(4)(2));
+console.log(mul(4)(3));
+console.log(mul(4)(4));
+console.log(mul(4)(5));
+console.log(mul(4)(6));
+console.log(mul(4)(7));
+console.log(mul(4)(8));
+console.log(mul(4)(9));
+console.log(mul(4)(10));

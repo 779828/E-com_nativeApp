@@ -85,6 +85,9 @@ const CheckoutScreen = () => {
       const paymentMethod =
         selectedPayment === "cod" ? "Cash on Delivery" : "Credit/Debit Card";
 
+      // Debug log to check items
+      console.log("Cart Items:", items);
+
       const ordersToInsert = items.map((item) => ({
         user_id: user.id,
         total: (parseFloat(item.products.price) * item.quantity).toFixed(2),
@@ -96,6 +99,7 @@ const CheckoutScreen = () => {
           title: selectedAddressData.title,
           subtitle: selectedAddressData.subtitle,
         },
+        vendor_id: item.products.user_id,
       }));
 
       console.log(ordersToInsert);
